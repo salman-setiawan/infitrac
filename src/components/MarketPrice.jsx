@@ -69,7 +69,7 @@ const MarketPrice = ({ coinId }) => {
             <p className="text-[10px]">Price: {coinData.usd}</p>
             {/* Menampilkan perubahan harga 24 jam dengan harga baru dan persentase */}
             <p
-              className={`text-[10px] ${coinData.priceChange24h < 0 ? 'text-red-300' : 'text-green-300'}`}
+              className={`text-[8px] ${coinData.priceChange24h < 0 ? 'text-red-300' : 'text-green-300'}`}
             >
               {coinData.priceChangeValue24h.toFixed(2)} ({coinData.priceChange24h.toFixed(2)}%)
             </p>
