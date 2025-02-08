@@ -38,15 +38,15 @@ const Home = () => {
           </div>
           <div className="pb-4">
             <p className="font-medium text-[14px] pb-4">Important Note</p>
-            <div className="grid grid-cols-2 gap-1">
-              <p className="text-[10px] text-blue-400">Market Cycle</p>
-              <p className="text-[10px] text-blue-400">Trade 101</p>
-              <p className="text-[10px] text-blue-400">Long Term News Research</p>
-              <p className="text-[10px] text-blue-400">Human and Market Psychology</p>
-              <p className="text-[10px] text-blue-400">Global Macro Economy</p>
-              <p className="text-[10px] text-blue-400">Management Risk</p>
-              <p className="text-[10px] text-blue-400">Indicator Strategy</p>
-              <p className="text-[10px] text-blue-400">Insightful Mindset</p>
+            <div className="grid grid-cols-2 gap-1.5">
+              <p className="text-[11px] text-blue-400 font-medium">Market Cycle</p>
+              <p className="text-[11px] text-blue-400 font-medium">Trade 101</p>
+              <p className="text-[11px] text-blue-400 font-medium">Long Term News Research</p>
+              <p className="text-[11px] text-blue-400 font-medium">Human and Market Psychology</p>
+              <p className="text-[11px] text-blue-400 font-medium">Global Macro Economy</p>
+              <p className="text-[11px] text-blue-400 font-medium">Management Risk</p>
+              <p className="text-[11px] text-blue-400 font-medium">Indicator Strategy</p>
+              <p className="text-[11px] text-blue-400 font-medium">Insightful Mindset</p>
             </div>
           </div>
         </div>

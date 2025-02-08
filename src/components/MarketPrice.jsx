@@ -65,8 +65,8 @@ const MarketPrice = ({ coinId }) => {
             />
           )}
           <div>
-            <h1 className="text-[10px] text-neutral-500">{coinId.toUpperCase()}</h1>
-            <p className="text-[10px]">Price: {coinData.usd}</p>
+            <h1 className="text-[10px] font-medium text-neutral-400 pb-[2px]">{coinId.toUpperCase()}</h1>
+            <p className="text-[12px]">{coinData.usd}</p>
             {/* Menampilkan perubahan harga 24 jam dengan harga baru dan persentase */}
             <p
               className={`text-[8px] ${coinData.priceChange24h < 0 ? 'text-red-300' : 'text-green-300'}`}
