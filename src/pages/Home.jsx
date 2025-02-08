@@ -19,13 +19,24 @@ const Home = () => {
           </div>
           <img src="pixel.gif" alt="banner" className="w-full h-[120px] object-cover" />
           <div className="pb-4">
-            <p className="font-medium text-[14px] pb-4">Current Price</p>
             {/* ID LIST HERE https://docs.google.com/spreadsheets/d/1wTTuxXt8n9q7C4NDXqQpI3wpKu1_5bGVmP9Xz0XGSyU/edit?gid=0#gid=0 */}
-            <div className="grid grid-cols-2 gap-y-2">
-              <MarketPrice coinId="bitcoin" />
-              <MarketPrice coinId="ethereum" />
-              <MarketPrice coinId="sui" />
-              <MarketPrice coinId="ondo-finance" />
+            <div className="logos">
+              <div className="logos-slide">
+                <div className="flex">
+                  <MarketPrice coinId="bitcoin" />
+                  <MarketPrice coinId="ethereum" />
+                  <MarketPrice coinId="sui" />
+                  <MarketPrice coinId="ondo-finance" />
+                </div>
+              </div>
+              <div className="logos-slide">
+                <div className="flex">
+                  <MarketPrice coinId="bitcoin" />
+                  <MarketPrice coinId="ethereum" />
+                  <MarketPrice coinId="sui" />
+                  <MarketPrice coinId="ondo-finance" />
+                </div>
+              </div>
             </div>
           </div>
           <div className="pb-4">

@@ -97,3 +97,55 @@
 .animate-blink {
   animation: blink 1s infinite;
 }
+
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.logos {
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.logos:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 8%;
+  height: 100%;
+  background: linear-gradient(to left, transparent, #111111);
+  z-index: 2;
+  content: '';
+}
+
+.logos:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, #111111);
+  z-index: 2;
+  content: '';
+}
+
+.logos-slide {
+  display: inline-block;
+  animation: 10s slide infinite linear;
+}
+
+
+
+
+
+
+
+
+
+

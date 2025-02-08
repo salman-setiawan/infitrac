@@ -47,32 +47,31 @@ const MarketPrice = ({ coinId }) => {
   }, [coinId]);
 
   return (
-    <div>
+    <div className='pr-[80px]'>
       {error ? (
         <div style={{ color: 'red' }}>
           <p className="text-[10px]">{error}</p>
         </div>
       ) : coinData ? (
-        <div className="flex items-start">
+        <div className="flex items-center">
           {/* Menampilkan gambar koin */}
           {coinData.image && (
             <img
               src={coinData.image}
               alt={`${coinId} icon`}
-              width={18} // Ukuran gambar bisa disesuaikan
-              height={18}
-              className="mr-3 mt-1"
+              width={24}
+              className="mr-2"
             />
           )}
           <div>
-            <h1 className="text-[10px] font-medium text-neutral-400 pb-[2px]">{coinId.toUpperCase()}</h1>
-            <p className="text-[12px]">{coinData.usd}</p>
-            {/* Menampilkan perubahan harga 24 jam dengan harga baru dan persentase */}
-            <p
-              className={`text-[8px] ${coinData.priceChange24h < 0 ? 'text-red-300' : 'text-green-300'}`}
-            >
-              {coinData.priceChangeValue24h.toFixed(2)} ({coinData.priceChange24h.toFixed(2)}%)
-            </p>
+            <h1 className="text-[8px] font-medium text-neutral-400">{coinId.toUpperCase()}</h1>
+            <div className="flex items-center gap-x-1">
+              <p className="text-[12px]">{coinData.usd}</p>
+              <p className={`text-[8px] ${coinData.priceChange24h < 0 ? 'text-red-300' : 'text-green-300'}`}>
+                {/* {coinData.priceChangeValue24h.toFixed(2)}  */}
+                ({coinData.priceChange24h.toFixed(2)}%)
+              </p>
+            </div>
           </div>
         </div>
       ) : (
