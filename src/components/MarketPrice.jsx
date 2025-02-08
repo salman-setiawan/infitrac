@@ -41,7 +41,7 @@ const MarketPrice = ({ coinId }) => {
 
     const interval = setInterval(() => {
       fetchCoinData();
-    }, 60000);
+    }, 180000);
 
     return () => clearInterval(interval);
   }, [coinId]);
