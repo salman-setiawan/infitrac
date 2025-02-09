@@ -17,12 +17,11 @@ const LineChart = () => {
   const data = {
     labels: capitalData.map(item => item.date), // Label sumbu X berdasarkan bulan
     datasets: [
-      {
-        label: 'Total', // Nama dataset
+      { 
         data: capitalData.map(item => item.total), // Data pada sumbu Y
-        fill: false, // Tidak ada area di bawah garis
         borderColor: '#8EC5FF', // Warna garis
-        tension: 0.3, // Kelengkungan garis
+        backgroundColor: '#8EC5FF', // Warna garis
+        tension: 0, // Kelengkungan garis
       },
     ],
   };
@@ -30,29 +29,41 @@ const LineChart = () => {
   // Menyiapkan options untuk chart
   const options = {
     responsive: true,
-    maintainAspectRatio: false, // Ini memastikan chart menyesuaikan dengan ukuran kontainer
+    maintainAspectRatio: false,
     scales: {
       y: {
-        beginAtZero: true, // Mulai dari angka 0
-        min: 0, // Set minimum value
-        max: 30000, // Set maximum value
+        beginAtZero: true,
+        min: -5000,
+        max: 25000,
         ticks: {
-          stepSize: 6000, // Tentukan interval tick
+          stepSize: 5000,
           font: {
-            size: 9, // Ukuran font untuk sumbu X
-            family: 'Space Mono', // Jenis font untuk sumbu X
+            size: 9,
+            family: 'Space Mono',
           },
         },
       },
       x: {
-        offset: true, // Memberikan jarak antara sumbu X dan Y
+        offset: true,
         ticks: {
           padding: 4,
           font: {
-            size: 9, // Ukuran font untuk sumbu X
-            family: 'Space Mono', // Jenis font untuk sumbu X
+            size: 9,
+            family: 'Space Mono',
           },
         },
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          title: function() {
+            return ''; // Menghilangkan judul tooltip yang biasanya berisi informasi sumbu x
+          },
+        },
+        // Menonaktifkan border, background dan warna kotak pada tooltip
+        backgroundColor: '#111111', // Transparan (tanpa latar belakang)
+        displayColors: false, // Menghilangkan warna titik di tooltip
       },
     },
   };

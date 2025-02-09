@@ -41,13 +41,13 @@ const MarketPrice = ({ coinId }) => {
 
     const interval = setInterval(() => {
       fetchCoinData();
-    }, 180000);
+    }, 240000);
 
     return () => clearInterval(interval);
   }, [coinId]);
 
   return (
-    <div className='pr-[80px]'>
+    <div className='pr-[68px]'>
       {error ? (
         <div style={{ color: 'red' }}>
           <p className="text-[10px]">{error}</p>
@@ -65,10 +65,12 @@ const MarketPrice = ({ coinId }) => {
           )}
           <div>
             <h1 className="text-[8px] font-medium text-neutral-400">{coinId.toUpperCase()}</h1>
-            <div className="flex items-center gap-x-1">
-              <p className="text-[12px]">{coinData.usd}</p>
+            <p className="text-[14px]">{coinData.usd}</p>
+            <div className="flex gap-x-1 mt-[-2px]">
+              <p className={`text-[8px] font-medium ${coinData.priceChange24h < 0 ? 'text-red-300' : 'text-green-300'}`}>
+                {coinData.priceChangeValue24h.toFixed(2)} 
+              </p>
               <p className={`text-[8px] ${coinData.priceChange24h < 0 ? 'text-red-300' : 'text-green-300'}`}>
-                {/* {coinData.priceChangeValue24h.toFixed(2)}  */}
                 ({coinData.priceChange24h.toFixed(2)}%)
               </p>
             </div>

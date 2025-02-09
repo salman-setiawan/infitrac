@@ -17,24 +17,26 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <img src="pixel.gif" alt="banner" className="w-full h-[120px] object-cover" />
           <div className="pb-4">
-            {/* ID LIST HERE https://docs.google.com/spreadsheets/d/1wTTuxXt8n9q7C4NDXqQpI3wpKu1_5bGVmP9Xz0XGSyU/edit?gid=0#gid=0 */}
-            <div className="logos">
-              <div className="logos-slide">
-                <div className="flex">
-                  <MarketPrice coinId="bitcoin" />
-                  <MarketPrice coinId="ethereum" />
-                  <MarketPrice coinId="sui" />
-                  <MarketPrice coinId="ondo-finance" />
+            <img src="pixel.gif" alt="banner" className="w-full h-[120px] object-cover" />
+            <div className="mt-4">
+              {/* ID LIST HERE https://docs.google.com/spreadsheets/d/1wTTuxXt8n9q7C4NDXqQpI3wpKu1_5bGVmP9Xz0XGSyU/edit?gid=0#gid=0 */}
+              <div className="logos">
+                <div className="logos-slide">
+                  <div className="flex">
+                    <MarketPrice coinId="bitcoin" />
+                    <MarketPrice coinId="ethereum" />
+                    <MarketPrice coinId="sui" />
+                    <MarketPrice coinId="ondo-finance" />
+                  </div>
                 </div>
-              </div>
-              <div className="logos-slide">
-                <div className="flex">
-                  <MarketPrice coinId="bitcoin" />
-                  <MarketPrice coinId="ethereum" />
-                  <MarketPrice coinId="sui" />
-                  <MarketPrice coinId="ondo-finance" />
+                <div className="logos-slide">
+                  <div className="flex">
+                    <MarketPrice coinId="bitcoin" />
+                    <MarketPrice coinId="ethereum" />
+                    <MarketPrice coinId="sui" />
+                    <MarketPrice coinId="ondo-finance" />
+                  </div>
                 </div>
               </div>
             </div>

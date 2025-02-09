@@ -100,8 +100,8 @@ const SpendingTable = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <div className="table w-full min-w-max pb-2 h-[177px] overflow-y-auto">
+      <div className="overflow-x-auto h-[182px] overflow-y-hidden">
+        <div className="table w-full min-w-max pb-2">
           <div className="table-header-group text-[10px] text-neutral-500">
             <div className="table-row">
               {headers.map((header, index) => (

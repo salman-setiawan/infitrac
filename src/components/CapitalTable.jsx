@@ -16,7 +16,7 @@ const getTextColor = (key, value, pnlValue) => {
 const CapitalTable = () => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+  const itemsPerPage = 12;
 
   const formatNumber = (num) => {
     if (num === null || num === undefined) return '-';
@@ -26,12 +26,12 @@ const CapitalTable = () => {
   useEffect(() => {
     const formattedData = capitalData.map(item => ({
       ...item,
-      "Circulating Num": formatNumber(item.circulating.num),
-      "Circulating %": formatNumber(item.circulating.percent),
-      "Debit Num": formatNumber(item.debit.num),
-      "Debit %": formatNumber(item.debit.percent),
-      "Cash Num": formatNumber(item.cash.num),
-      "Cash %": formatNumber(item.cash.percent),
+      "Circulating Num": formatNumber(item.circulating),
+      "Circulating %": formatNumber(item.circulatingPercent),
+      "Debit Num": formatNumber(item.debit),
+      "Debit %": formatNumber(item.debitPercent),
+      "Cash Num": formatNumber(item.cash),
+      "Cash %": formatNumber(item.cashPercent),
       "Total Num": formatNumber(item.total),
       "PnL": formatNumber(item.pnl)
     }));
@@ -50,13 +50,34 @@ const CapitalTable = () => {
     { label: "PnL", key: "PnL", width: "", padding: "pr-0", alignment: "text-right" }
   ];
 
-  const gainLoss = data.length > 0 
-    ? (capitalData[capitalData.length - 1].total - capitalData[0].total) 
-    : 0;
+  // Find the first non-zero total in the data
+  let startIndex = 0;
+  while (startIndex < data.length && data[startIndex].total === 0) {
+    startIndex++;
+  }
 
-  const percentageGainLoss = data.length > 0 && data[0].total > 0
-    ? ((data[data.length - 1].total - data[0].total) / data[data.length - 1].total) * 100
-    : 0;
+  // If there is no valid data (all totals are 0), use the first available data point
+  const validStart = startIndex < data.length ? data[startIndex] : null;
+
+  // Find the last non-zero total in the data
+  let endIndex = data.length - 1;
+  while (endIndex >= 0 && data[endIndex].total === 0) {
+    endIndex--;
+  }
+
+  // If there is no valid data (all totals are 0), use the last available data point
+  const validEnd = endIndex >= 0 ? data[endIndex] : null;
+
+  if (!validStart || !validEnd) {
+    // Handle the case where there are no valid data points with non-zero totals
+    console.error("No valid data available.");
+    return null;
+  }
+
+  // Generate years starting from 2024
+  const startYear = 2024;
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const years = Array.from({ length: totalPages }, (_, index) => startYear + index);
 
   // Calculate pagination
   const indexOfLastItem = currentPage * itemsPerPage;
@@ -66,23 +87,20 @@ const CapitalTable = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Total number of pages
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+  // Current year corresponding to the current page
+  const currentYear = years[currentPage - 1]; 
 
   return (
     <div>
       <div className="w-full pb-6">
         <LineChart />
       </div>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto h-[210px] overflow-y-hidden">
         <div className="table w-full min-w-max pb-2">
           <div className="table-header-group text-[10px] text-neutral-500">
             <div className="table-row">
               {headers.map((header, index) => (
-                <div
-                  className={`${header.width} ${header.padding} ${header.alignment} table-cell pb-1`}
-                  key={index}
-                >
+                <div className={`${header.width} ${header.padding} ${header.alignment} table-cell pb-1`} key={index}>
                   {header.label}
                 </div>
               ))}
@@ -96,11 +114,7 @@ const CapitalTable = () => {
                     className={`table-cell ${header.width} ${header.padding} ${header.alignment} ${getTextColor(header.key, item[header.key], item.pnl)}`}
                     key={idx}
                   >
-                    {header.key.includes("%") ? (
-                      item[header.key]
-                    ) : (
-                      item[header.key]
-                    )}
+                    {item[header.key]}
                   </div>
                 ))}
               </div>
@@ -108,23 +122,29 @@ const CapitalTable = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="pt-3 flex justify-between text-[10px]">
         <p className="text-neutral-500">Gain/Loss</p>
-        <p className="text-green-300">{formatNumber(gainLoss)}</p>
+        <p className="text-green-300">
+          {formatNumber(validEnd.total - validStart.total)}
+        </p>
       </div>
       <div className="flex justify-between text-[10px]">
         <p className="text-neutral-500">Percentage</p>
-        <p className="text-green-300">{formatNumber(percentageGainLoss)}%</p>
+        <p className="text-green-300">
+          {formatNumber(
+            validStart.total > 0
+            ? ((validEnd.total - validStart.total) / validStart.total) * 100
+            : 0
+          )}%
+        </p>
       </div>
 
       {/* Pagination Controls */}
       <div className="flex justify-between pt-4 gap-x-3 items-center">
         <p className="text-[10px] text-neutral-500">
-          <span>Page</span> 
-          <span className="text-white"> {currentPage} </span>
-          <span>of</span> 
-          <span className="text-white"> {totalPages}</span>
+          <span>Year of</span>
+          <span className="text-white"> {currentYear} </span>
         </p>
         <div className="flex gap-x-3">
           <button
