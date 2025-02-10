@@ -14,10 +14,21 @@ const Content = ({ data }) => {
           <img className="w-full text-[10px]" src={data.img} alt={data.desc ? data.desc : 'image'} />
           <p className="w-full text-center pt-1.5 text-[10px] text-gray-500">{data.desc ? data.desc : ''}</p>
         </div>
+      ) : data.links && data.links.length > 0 ? ( // Cek jika ada banyak link
+        <div className=''>
+          {data.links.map((link, index) => (
+            <div key={index}>
+              {/* Gunakan <a> untuk link eksternal dan set target="_blank" */}
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
+                <div className="font-semibold text-[12px] text-blue-500 py-1">{link.alias}</div>
+              </a>
+            </div>
+          ))}
+        </div>
       ) : (
         <div className="leading-relaxed text-justify">
-          {data.title && <div className="font-semibold text-[14px] pb-1"> {data.title} </div>}
-          {data.text && <div className="text-[12px] text-gray-300"> {data.text} </div>}
+          {data.title && <div className="font-semibold text-[14px] pb-1">{data.title}</div>}
+          {data.text && <div className="text-[12px] text-gray-300">{data.text}</div>}
         </div>
       )}
     </div>
@@ -27,9 +38,15 @@ const Content = ({ data }) => {
 Content.propTypes = {
   data: PropTypes.shape({
     img: PropTypes.string,
-    desc: PropTypes.object, 
-    title: PropTypes.object, 
-    text: PropTypes.object, 
+    desc: PropTypes.string,
+    title: PropTypes.string,
+    text: PropTypes.string,
+    links: PropTypes.arrayOf(
+      PropTypes.shape({
+        url: PropTypes.string.isRequired,
+        alias: PropTypes.string.isRequired,
+      })
+    ),
   }),
 };
 
@@ -39,6 +56,7 @@ Content.defaultProps = {
     desc: null,
     title: null,
     text: null,
+    links: [],
   },
 };
 
