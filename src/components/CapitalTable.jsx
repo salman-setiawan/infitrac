@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import capitalData from '../data/capital.js'; 
 import LineChart from "./LineChart.jsx";
 
@@ -50,57 +50,55 @@ const CapitalTable = () => {
     { label: "PnL", key: "PnL", width: "", padding: "pr-0", alignment: "text-right" }
   ];
 
-  // Find the first non-zero total in the data
-  let startIndex = 0;
-  while (startIndex < data.length && data[startIndex].total === 0) {
-    startIndex++;
-  }
+  // Calculate valid start and end indexes only once using useMemo
+  const { validStart, validEnd } = useMemo(() => {
+    let startIndex = 0;
+    while (startIndex < data.length && data[startIndex].total === 0) {
+      startIndex++;
+    }
+    const validStart = startIndex < data.length ? data[startIndex] : null;
 
-  // If there is no valid data (all totals are 0), use the first available data point
-  const validStart = startIndex < data.length ? data[startIndex] : null;
+    let endIndex = data.length - 1;
+    while (endIndex >= 0 && data[endIndex].total === 0) {
+      endIndex--;
+    }
+    const validEnd = endIndex >= 0 ? data[endIndex] : null;
 
-  // Find the last non-zero total in the data
-  let endIndex = data.length - 1;
-  while (endIndex >= 0 && data[endIndex].total === 0) {
-    endIndex--;
-  }
-
-  // If there is no valid data (all totals are 0), use the last available data point
-  const validEnd = endIndex >= 0 ? data[endIndex] : null;
+    return { validStart, validEnd };
+  }, [data]);
 
   if (!validStart || !validEnd) {
-    // Handle the case where there are no valid data points with non-zero totals
     console.error("No valid data available.");
     return null;
   }
 
-  // Generate years starting from 2024
   const startYear = 2024;
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const years = Array.from({ length: totalPages }, (_, index) => startYear + index);
 
-  // Calculate pagination
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentData = data.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Current year corresponding to the current page
-  const currentYear = years[currentPage - 1]; 
+  const currentYear = years[currentPage - 1];
 
   return (
     <div>
       <div className="w-full pb-6">
         <LineChart />
       </div>
-      <div className="overflow-x-auto h-[210px] overflow-y-hidden">
-        <div className="table w-full min-w-max pb-2">
-          <div className="table-header-group text-[10px] text-neutral-500">
+      <div className="overflow-x-auto h-[206px] bg-neutral-900 overflow-y-hidden">
+        <div className="table w-full min-w-max">
+          <div className="table-header-group text-[10px] text-neutral-500 bg-[#111111]">
             <div className="table-row">
               {headers.map((header, index) => (
-                <div className={`${header.width} ${header.padding} ${header.alignment} table-cell pb-1`} key={index}>
+                <div
+                  className={`${header.width} ${header.padding} ${header.alignment} table-cell py-0.5 
+                              ${index === 0 ? 'pl-1' : ''} 
+                              ${index === headers.length - 1 ? 'pr-1' : ''}`}
+                  key={index}
+                >
                   {header.label}
                 </div>
               ))}
@@ -111,7 +109,9 @@ const CapitalTable = () => {
               <div className="table-row" key={index}>
                 {headers.map((header, idx) => (
                   <div
-                    className={`table-cell ${header.width} ${header.padding} ${header.alignment} ${getTextColor(header.key, item[header.key], item.pnl)}`}
+                    className={`table-cell ${header.width} ${header.padding} ${header.alignment} ${getTextColor(header.key, item[header.key], item.pnl)} 
+                                ${idx === 0 ? 'pl-1' : ''} 
+                                ${idx === headers.length - 1 ? 'pr-1' : ''}`}
                     key={idx}
                   >
                     {item[header.key]}
@@ -122,7 +122,6 @@ const CapitalTable = () => {
           </div>
         </div>
       </div>
-
       <div className="pt-3 flex justify-between text-[10px]">
         <p className="text-neutral-500">Gain/Loss</p>
         <p className="text-green-300">

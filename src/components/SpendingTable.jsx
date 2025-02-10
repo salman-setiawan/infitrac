@@ -100,12 +100,13 @@ const SpendingTable = () => {
         </div>
       </div>
 
-      <div className="overflow-x-auto h-[182px] overflow-y-hidden">
-        <div className="table w-full min-w-max pb-2">
-          <div className="table-header-group text-[10px] text-neutral-500">
+      <div className="overflow-x-auto h-[178px] bg-neutral-900 overflow-y-hidden">
+        <div className="table w-full min-w-max">
+          <div className="table-header-group text-[10px] text-neutral-500 bg-[#111111]">
             <div className="table-row">
               {headers.map((header, index) => (
-                <div className={`${header.width} ${header.padding} ${header.alignment} table-cell pb-1`} key={index}>
+                <div className={`${header.width} ${header.padding} ${header.alignment} table-cell py-0.5 ${index === 0 ? 'pl-1' : ''} 
+                              ${index === headers.length - 1 ? 'pr-1' : ''}`} key={index}>
                   {header.label}
                 </div>
               ))}
@@ -116,7 +117,8 @@ const SpendingTable = () => {
               <div className="table-row" key={index}>
                 {headers.map((header, idx) => (
                   <div
-                    className={`table-cell truncate ${header.width} ${header.padding} ${header.alignment} ${header.key === 'category' ? getTextColor(item[header.key]) : ''}`}
+                    className={`table-cell truncate ${header.width} ${header.padding} ${header.alignment} ${header.key === 'category' ? getTextColor(item[header.key]) : ''} ${idx === 0 ? 'pl-1' : ''} 
+                    ${idx === headers.length - 1 ? 'pr-1' : ''}`}
                     key={idx}
                   >
                     {/* Kolom spend yang diformat dengan formatNumber */}
