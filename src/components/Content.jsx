@@ -31,7 +31,6 @@ Content.propTypes = {
     title: PropTypes.object, 
     text: PropTypes.object, 
   }),
-  language: PropTypes.string.isRequired,
 };
 
 Content.defaultProps = {

@@ -4,8 +4,8 @@ import Notfound from './404.jsx';
 import Content from '../components/Content.jsx';
 
 const Notes = () => {
-  const { id } = useParams();
-  const selectedNotes = NotesData.find(Notes => Notes.id === parseInt(id));
+  const { url } = useParams(); // Ambil parameter URL dari route
+  const selectedNotes = NotesData.find((note) => note.url === url); // Temukan data berdasarkan url
 
   if (!selectedNotes) {
     return <Notfound />;
@@ -26,7 +26,7 @@ const Notes = () => {
 
   return (
     <div>
-      <div className="flex place-content-center md:py-8 px-4 md:px-8 md:max-h-screen">
+      <div className="flex place-content-center py-8 px-4 md:px-8 md:max-h-screen">
         <div className="flex flex-col gap-y-4 w-full md:w-[720px]">
           <div className="text-[16px] font-semibold text-blue-400"> {title} </div>
           {contentArray.map((content, index) => 

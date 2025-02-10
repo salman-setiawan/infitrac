@@ -2,6 +2,7 @@ const NotesData = [
   {
     id: 1,
     title: 'Market Cycle Research',
+    url: 'market-cycle-research',
     content1: {
       text: 'Siklus pasar cryptocurrency umumnya terjadi setiap empat tahun sekali, terdiri dari tiga tahun fase bull dan satu tahun fase bear. Fase bull market sering kali dipicu oleh adopsi teknologi baru, meningkatnya minat institusi, atau faktor eksternal seperti pengaturan regulasi yang lebih mendukung. Sementara itu, fase bear market biasanya ditandai oleh ketidakpastian global atau penurunan sentimen investor.'
     },

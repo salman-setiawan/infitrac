@@ -54,11 +54,11 @@ const Home = () => {
           <div className="pb-4">
             <p className="font-medium text-[14px] pb-4">Important Note</p>
             <div className="grid grid-cols-2">
-              {NotesData.map((article) => (
+              {NotesData.map((notes) => (
                 <TextButton
-                  key={article.id}
-                  url={`/notes/${article.id}`}
-                  text={article.title}
+                  key={notes.id}
+                  url={`/notes/${notes.url}`}
+                  text={notes.title}
                 />
               ))}
             </div>
