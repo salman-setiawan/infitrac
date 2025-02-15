@@ -5,59 +5,49 @@ const Content = ({ data }) => {
     return url && /\.(jpg|jpeg|png|webp)$/i.test(url);
   };
 
-  const hasValidImage = data && isValidImage(data.img);
-
   return (
     <div>
-      {hasValidImage ? (
-        <div className='py-2'>
-          <img className="w-full text-[10px]" src={data.img} alt={data.desc ? data.desc : 'image'} />
-          <p className="w-full text-center pt-1.5 text-[10px] text-gray-500">{data.desc ? data.desc : ''}</p>
-        </div>
-      ) : data.links && data.links.length > 0 ? ( // Cek jika ada banyak link
-        <div className=''>
-          {data.links.map((link, index) => (
+      {data.map((item, index) => {
+        if (item.img && isValidImage(item.img)) {
+          return (
+            <div key={index} className="py-2">
+              <img className="w-full text-[10px]" src={item.img} alt={item.desc || 'image'} />
+              <p className="w-full text-center pt-1.5 text-[10px] text-gray-500">{item.desc || ''}</p>
+            </div>
+          );
+        }
+        if (item.text) {
+          return (
+            <div key={index} className="leading-relaxed text-justify">
+              <p className="text-[12px] text-gray-300 my-5">{item.text}</p>
+            </div>
+          );
+        }
+        if (item.url && item.alias) {
+          return (
             <div key={index}>
-              {/* Gunakan <a> untuk link eksternal dan set target="_blank" */}
-              <a href={link.url} target="_blank" rel="noopener noreferrer">
-                <div className="font-semibold text-[12px] text-blue-500 py-1">{link.alias}</div>
+              <a href={item.url} target="_blank" rel="noopener noreferrer">
+                <div className="font-semibold text-[12px] text-blue-500 py-1.5">{item.alias}</div>
               </a>
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="leading-relaxed text-justify">
-          {data.title && <div className="font-semibold text-[14px] pb-1">{data.title}</div>}
-          {data.text && <div className="text-[12px] text-gray-300">{data.text}</div>}
-        </div>
-      )}
+          );
+        }
+        return null;
+      })}
     </div>
   );
 };
 
 Content.propTypes = {
-  data: PropTypes.shape({
-    img: PropTypes.string,
-    desc: PropTypes.string,
-    title: PropTypes.string,
-    text: PropTypes.string,
-    links: PropTypes.arrayOf(
-      PropTypes.shape({
-        url: PropTypes.string.isRequired,
-        alias: PropTypes.string.isRequired,
-      })
-    ),
-  }),
-};
-
-Content.defaultProps = {
-  data: {
-    img: null,
-    desc: null,
-    title: null,
-    text: null,
-    links: [],
-  },
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      text: PropTypes.string,
+      img: PropTypes.string,
+      url: PropTypes.string,
+      alias: PropTypes.string,
+      desc: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default Content;
