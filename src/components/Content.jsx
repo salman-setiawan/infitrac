@@ -27,7 +27,7 @@ const Content = ({ data }) => {
           return (
             <div key={index}>
               <a href={item.url} target="_blank" rel="noopener noreferrer">
-                <div className="font-semibold text-[12px] text-blue-500 py-1.5">{item.alias}</div>
+                <div className="font-semibold text-[12px] text-blue-400 py-1">{item.alias}</div>
               </a>
             </div>
           );

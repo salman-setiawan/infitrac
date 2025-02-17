@@ -13,20 +13,20 @@ const Notes = () => {
 
   const {
     title,
-    content1, content2, content3, content4, content5,
+    content1, content2, content3, content4, content5, content6, content7
   } = selectedNotes;
 
   const contentArray = [
-    content1, content2, content3, content4, content5
+    content1, content2, content3, content4, content5, content6, content7
   ];
 
   return (
     <div>
       <div className="flex place-content-center py-8 px-4 md:px-8 md:max-h-screen">
         <div className="flex flex-col gap-y-2 w-full md:w-[720px]">
-          <div className="text-[16px] font-semibold text-blue-400"> {title} </div>
+          <div className="text-[16px] font-semibold text-blue-200"> {title} </div>
           {contentArray.map((content, index) => 
-            content.data && content.data.length > 0 ? (
+            content && content.data && content.data.length > 0 ? (
               <div key={index} className="pb-2">
                 <Content data={content.data} />
               </div>
