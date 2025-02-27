@@ -1,6 +1,10 @@
+import Identify from "./pages/identify"
+
 const App = () => {
   return (
-    <div></div>
+    <div>
+      <Identify />
+    </div>
   );
 };
 
