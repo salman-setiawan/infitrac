@@ -11,7 +11,7 @@ import Home from './pages/Home';
 import Notes from './pages/Notes';
 import Notfound from './pages/404';
 import PrivateRoute from './components/PrivateRoute';  // Import the PrivateRoute component
-import Identify from './pages/identify';
+import Dentify from './pages/Dentify';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/login-session",
-    element: <Identify />,
+    element: <Dentify />,
   },
   {
     path: "/home",

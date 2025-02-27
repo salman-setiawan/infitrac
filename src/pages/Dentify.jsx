@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Use useNavigate for navigatio
 import AuthData from '../data/auth'; // Importing authentication data
 import bowser from 'bowser';  // Import bowser
 
-const Identify = () => {
+const Dentify = () => {
   const [inputValue, setInputValue] = useState('');
   const [commands, setCommands] = useState([]);
   const [step, setStep] = useState(1);  // Track step (ID or password)
@@ -116,4 +116,4 @@ const Identify = () => {
   );
 };
 
-export default Identify;
+export default Dentify;
