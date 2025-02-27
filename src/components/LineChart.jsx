@@ -26,6 +26,10 @@ const LineChart = () => {
     ],
   };
 
+  // Menentukan nilai maksimum untuk sumbu Y
+  const maxYValue = Math.max(...capitalData.map(item => Math.round(item.total / 1000) * 1000)) + 1000;
+
+
   // Menyiapkan options untuk chart
   const options = {
     responsive: true,
@@ -33,8 +37,8 @@ const LineChart = () => {
     scales: {
       y: {
         beginAtZero: true,
-        min: -5000,
-        max: 25000,
+        min: -2000,
+        max: maxYValue, // Menggunakan nilai maksimum yang dihitung
         ticks: {
           stepSize: 5000,
           font: {
