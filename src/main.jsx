@@ -10,8 +10,8 @@ import './index.css';
 import Home from './pages/Home';
 import Notes from './pages/Notes';
 import Notfound from './pages/404';
-import Identify from './pages/identify';
 import PrivateRoute from './components/PrivateRoute';  // Import the PrivateRoute component
+import Identify from './pages/identify';
 
 const router = createBrowserRouter([
   {
