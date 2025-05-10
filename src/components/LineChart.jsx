@@ -37,13 +37,16 @@ const LineChart = () => {
     scales: {
       y: {
         beginAtZero: true,
-        min: -2000,
+        min: -5000,
         max: maxYValue, // Menggunakan nilai maksimum yang dihitung
         ticks: {
           stepSize: 5000,
           font: {
             size: 9,
             family: 'Space Mono',
+          },
+          callback: function(value) {
+            return value / 1000; // Menampilkan 30000 menjadi 30
           },
         },
       },
