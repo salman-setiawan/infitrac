@@ -12,8 +12,10 @@ const capitalData = [
   {date: "11/24", circulating: 14036.17, debit: 72.00, cash: 100.00},
   {date: "12/24", circulating: 17461.24, debit: 584.50, cash: 100.00},
   {date: "01/25", circulating: 17002.83, debit: 1178.80, cash: 100.00},
-  {date: "02/25", circulating: 13502.83, debit: 2178.80, cash: 50.00},
-  {date: "03/25", circulating: 13390.83, debit: 866.20, cash: 50.00}
+  {date: "02/25", circulating: 13502.79, debit: 866.20, cash: 50.00},
+  {date: "03/25", circulating: 15524.01, debit: 476.50, cash: 50.00},
+  {date: "04/25", circulating: 23421.59, debit: 964.98, cash: 50.00},
+  {date: "05/25", circulating: 27121.29, debit: 1504.98, cash: 50.00},
 ];
 
 // Menghitung 'total', 'percent', 'pnl'
